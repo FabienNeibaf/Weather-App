@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Carter+One|Open+Sans:300&display=swap');
+
+* {
+  font-family: fantasy;
+  box-sizing: border-box;
+  font-family: 'Open Sans';
+}
+
+html,
+body,
+#root,
+#app {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-size: 13px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

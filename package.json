@@ -1,0 +1,43 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "The Weather App project brings together the concepts of Promises, Callbacks, APIs, Object Oriented Programming, Factory Functions, Module Pattern, Single Responsibility and Tightly Coupled Objects. This is made simple but lay down a solid structure for a more complex web app.   It is part of [microverse](https://www.microverse.org/) curriculum.",
+  "scripts": {
+    "build": "webpack",
+    "deploy": "gh-pages -d dist",
+    "start": "webpack-dev-server --open",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FabienNeibaf/Weather-App.git"
+  },
+  "keywords": [],
+  "author": "Fabien RAKOTOMAMPIANDRA",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FabienNeibaf/Weather-App/issues"
+  },
+  "homepage": "https://github.com/FabienNeibaf/Weather-App#readme",
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "file-loader": "^4.2.0",
+    "gh-pages": "^2.1.1",
+    "node-sass": "^4.12.0",
+    "prettier": "^1.18.2",
+    "resolve-url-loader": "^3.1.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.1"
+  }
+}
