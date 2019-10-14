@@ -1,3 +1,5 @@
-import { el, mount } from './utils';
+import './index.scss';
+import App from './App';
+import { mount } from './utils';
 
-mount(el('Hello World'), document.getElementById('root'));
+mount(App(), document.getElementById('root'));
