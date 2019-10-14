@@ -16,10 +16,52 @@ body,
 body {
   margin: 0;
   font-size: 13px;
+  background: #2347ca;
 }
 
 ul {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+#root {
+  // background: rgba(25, 25, 25, 0.5);
+}
+
+#header {
+  color: #fff;
+  padding: 0.5% 1%;
+
+  div {
+    width: 90%;
+    margin: auto;
+    max-width: 500px;
+    position: relative;
+
+    input {
+      width: 100%;
+      border: none;
+      color: #fff;
+      padding: 10px;
+      display: block;
+      text-align: center;
+      background: #4a6ce6;
+    }
+
+    ul {
+      width: 100%;
+      position: absolute;
+      background: #597af3;
+
+      li {
+        padding: 10px;
+        cursor: default;
+
+        &:hover {
+          background: #6e8aee;
+        }
+      }
+    }
+  }
 }
