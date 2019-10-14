@@ -1,10 +1,10 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: ['./src/index.js'],
   output: {
     filename: 'main.js',
-    // publicPath: '/TodoList/',
     path: path.resolve(__dirname, 'dist'),
   },
   devtool: 'eval-source-map',
@@ -20,7 +20,16 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'],
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  useBuiltIns: 'usage',
+                  corejs: { version: 3, proposals: true },
+                },
+              ],
+            ],
+            plugins: ['@babel/plugin-transform-regenerator'],
           },
         },
       },
@@ -47,4 +56,5 @@ module.exports = {
       },
     ],
   },
+  plugins: [new Dotenv()],
 };
