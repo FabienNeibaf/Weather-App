@@ -25,13 +25,16 @@ const format = date => {
 
 const suggestions = el('ul');
 document.body.addEventListener('click', e => {
-  const search = document.getElementById('search');
-  search.querySelector('input').value = '';
-  if (!search.contains(e.target)) suggestions.innerHTML = '';
+  const header = document.getElementById('header');
+  header.querySelector('input').value = '';
+  if (!header.contains(e.target)) suggestions.innerHTML = '';
 });
 
-const Fore = data =>
-  el('div', { class: 'fore' }, [
+const Fore = (forecast, data) => {
+  const { tempUnit } = forecast;
+  const temp = el('p', { class: 'temp' }, `${data.temp[tempUnit]}\u00B0`);
+  forecast.on('showIn', unit => mount(el(`${data.temp[unit]}\u00B0`), temp));
+  return el('div', { class: 'fore' }, [
     el('p', { class: 'date' }, [
       format(data.date).time,
       el(
@@ -44,9 +47,10 @@ const Fore = data =>
       src: `http://openweathermap.org/img/wn/${data.icon}.png`,
     }),
     el('p', { class: 'weather' }, data.weather),
-    el('p', { class: 'temp' }, `${data.temp}\u00B0`),
+    temp,
     el('p', { class: 'wind' }, [el('b', null, 'Wind: '), `${data.wind} m/s`]),
   ]);
+};
 
 const Time = forecast => {
   const time = el('p', { class: 'time' }, format(new Date()).time);
@@ -69,6 +73,33 @@ const City = (forecast, city) =>
     `${city.name}, ${city.country}`
   );
 
+const Switch = forecast => {
+  const celsius = el(
+    'button',
+    {
+      class: 'active',
+      onclick() {
+        forecast.showIn('celsius');
+      },
+    },
+    `\u00B0C`
+  );
+  const fahrenheit = el(
+    'button',
+    {
+      onclick() {
+        forecast.showIn('fahrenheit');
+      },
+    },
+    `\u00B0F`
+  );
+  forecast.on('showIn', unit => {
+    celsius.classList.toggle('active', unit === 'celsius');
+    fahrenheit.classList.toggle('active', unit === 'fahrenheit');
+  });
+  return el('div', { id: 'switch' }, [celsius, fahrenheit]);
+};
+
 const Header = forecast => {
   const cities = forecast.getCities();
   const input = el('input', {
@@ -89,7 +120,8 @@ const Header = forecast => {
     input.value = '';
     suggestions.innerHTML = '';
   });
-  return el('header', { id: 'search' }, [
+  return el('header', { id: 'header' }, [
+    Switch(forecast),
     input,
     el('img', { src: 'https://img.icons8.com/777777/search' }),
     suggestions,
@@ -97,55 +129,71 @@ const Header = forecast => {
 };
 
 const Main = forecast => {
+  const { tempUnit } = forecast;
   const content = el('div', { id: 'content' });
+  forecast.on('showIn', unit => {
+    const info = forecast.getInfo();
+    if (info.fore) {
+      const temp = content.querySelector('.current .temp');
+      mount(el(`${info.fore[0].temp[unit]}\u00B0`), temp);
+    }
+  });
   forecast.on('get', info => {
-    info.then(data =>
-      mount(
-        [
-          el('div', { class: 'current' }, [
-            el('div', { class: 'one' }, [
+    info.then(data => {
+      if (Object.getPrototypeOf(data).name === 'Error') {
+        mount(el('div', { class: 'error' }, data.message), content);
+      } else {
+        mount(
+          [
+            el('div', { class: 'current' }, [
+              el('div', { class: 'one' }, [
+                el(
+                  'p',
+                  { class: 'city' },
+                  `${data.city.name}, ${data.city.country}`
+                ),
+                el('p', { class: 'date' }, format(new Date()).full),
+                Time(forecast),
+              ]),
+              el('div', { class: 'two' }, [
+                el('img', {
+                  src: `http://openweathermap.org/img/wn/${data.fore[0].icon}@2x.png`,
+                }),
+                el('p', { class: 'weather' }, data.fore[0].weather),
+              ]),
               el(
-                'p',
-                { class: 'city' },
-                `${data.city.name}, ${data.city.country}`
+                'div',
+                { class: 'temp' },
+                `${data.fore[0].temp[tempUnit]}\u00B0`
               ),
-              el('p', { class: 'date' }, format(new Date()).full),
-              Time(forecast),
-            ]),
-            el('div', { class: 'two' }, [
-              el('img', {
-                src: `http://openweathermap.org/img/wn/${data.fore[0].icon}@2x.png`,
-              }),
-              el('p', { class: 'weather' }, data.fore[0].weather),
-            ]),
-            el('div', { class: 'temp' }, `${data.fore[0].temp}\u00B0`),
-            el('div', { class: 'four' }, [
-              el('p', null, [
-                el('b', null, 'Wind'),
-                `${data.fore[0].wind} m/s`,
-              ]),
-              el('p', null, [
-                el('b', null, 'Humidity'),
-                `${data.fore[0].humidity} \u0025`,
-              ]),
-              el('p', null, [
-                el('b', null, 'Pressure'),
-                `${data.fore[0].pressure} hPa`,
+              el('div', { class: 'four' }, [
+                el('p', null, [
+                  el('b', null, 'Wind'),
+                  `${data.fore[0].wind} m/s`,
+                ]),
+                el('p', null, [
+                  el('b', null, 'Humidity'),
+                  `${data.fore[0].humidity} \u0025`,
+                ]),
+                el('p', null, [
+                  el('b', null, 'Pressure'),
+                  `${data.fore[0].pressure} hPa`,
+                ]),
               ]),
             ]),
-          ]),
-          el('h2', null, 'Forecast'),
-          el('div', { class: 'forecast' }, [
-            Fore(data.fore[1]),
-            Fore(data.fore[2]),
-            Fore(data.fore[3]),
-            Fore(data.fore[4]),
-            Fore(data.fore[5]),
-          ]),
-        ],
-        content
-      )
-    );
+            el('h2', null, 'Forecast'),
+            el('div', { class: 'forecast' }, [
+              Fore(forecast, data.fore[1]),
+              Fore(forecast, data.fore[2]),
+              Fore(forecast, data.fore[3]),
+              Fore(forecast, data.fore[4]),
+              Fore(forecast, data.fore[5]),
+            ]),
+          ],
+          content
+        );
+      }
+    });
   });
   return el('main', { id: 'main' }, [Header(forecast), content]);
 };

@@ -1,4 +1,5 @@
-const degree = temp => Math.round(temp - 273.15);
+const celsius = temp => Math.round(temp - 273.15);
+const fahrenheit = temp => Math.round(((temp - 273.15) * 9) / 5);
 
 const Info = data => {
   const { city, list } = data;
@@ -8,7 +9,10 @@ const Info = data => {
     date: new Date(item.dt_txt),
     humidity: item.main.humidity,
     pressure: item.main.pressure,
-    temp: degree(item.main.temp),
+    temp: {
+      celsius: celsius(item.main.temp),
+      fahrenheit: fahrenheit(item.main.temp),
+    },
     rain: item.rain && item.rain['3h'],
     weather: item.weather[0].description,
     wind: Math.round(item.wind.speed * 10) / 10,

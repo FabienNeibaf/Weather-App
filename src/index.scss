@@ -49,7 +49,7 @@ p {
   align-items: center;
 }
 
-#search {
+#header {
   width: 90%;
   display: flex;
   padding: 1% 2%;
@@ -65,12 +65,14 @@ p {
   input {
     flex: auto;
     padding: 1%;
+    margin: 0 1%;
     border: none;
     color: #fff;
     display: block;
     background: none;
     text-align: center;
-    border-bottom: 1px solid #222;
+    background: #121716;
+    border-bottom: 1px solid transparent;
 
     &:focus {
       border-bottom-color: #777;
@@ -98,6 +100,22 @@ p {
       &:hover {
         background: #101a22;
       }
+    }
+  }
+}
+
+#switch {
+  display: flex;
+
+  button {
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    background: none;
+    padding: 5px 10px;
+
+    &.active {
+      background: #bf4a00;
     }
   }
 }
@@ -245,6 +263,15 @@ p {
         }
       }
     }
+  }
+
+  .error {
+    flex: auto;
+    display: flex;
+    font-size: 4em;
+    color: #bf0000;
+    align-items: center;
+    justify-content: center;
   }
 }
 
