@@ -26,6 +26,7 @@ const format = date => {
 const suggestions = el('ul');
 document.body.addEventListener('click', e => {
   const search = document.getElementById('search');
+  search.querySelector('input').value = '';
   if (!search.contains(e.target)) suggestions.innerHTML = '';
 });
 
