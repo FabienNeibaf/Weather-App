@@ -54,6 +54,18 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.jpg$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'images/',
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [new Dotenv()],
