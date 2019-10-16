@@ -1,45 +1,38 @@
 import Info from './Info';
+import { Observable } from './utils';
 import cities from './city.list.json';
 
-export default class Forecast {
+export default class Forecast extends Observable {
   constructor() {
+    super();
     this.info = null;
-    this.data = null;
+    this.update = null;
     this.cities = cities;
-    this.upTodate = false;
   }
 
   async get(id) {
-    let info = JSON.parse(localStorage.getItem('weather.forecast'));
-    if (info) return info;
-    info = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?id=${id}&appid=f61acd58d6e808934570a8fec6f4c8a7`,
-      { mode: 'cors' }
-    )
-      .then(response => response.json())
-      .then(data => {
-        this.data = data;
-        this.upTodate = true;
-        return Info(data);
-      });
-    this.info = info;
-    localStorage.setItem('weather.forecast', JSON.stringify(info));
-    setTimeout(() => {
-      this.upTodate = false;
-    }, 15000);
-    // if (!(this.data && this.data.city.id === id && this.upTodate)) {
-    //   this.update(id);
-    // }
+    let { info } = this;
+    if (info === null || info.city.id !== id) {
+      clearInterval(this.update);
+      info = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?id=${id}&cnt=6&appid=f61acd58d6e808934570a8fec6f4c8a7`,
+        { mode: 'cors' }
+      )
+        .then(response => response.json())
+        .then(data => Info(data));
+      this.info = info;
+      this.update = setInterval(() => this.get(id), 600000);
+    }
     return info;
+  }
+
+  updateTime() {
+    const now = new Date();
+    this.info.fore[0].date = now;
+    return now;
   }
 
   getCities() {
     return this.cities;
   }
 }
-
-// Forecast.prototype.getInfo = function() {
-//   const info = JSON.parse(localStorage.getItem('weather.forecast'));
-//   if (!info) this.get().then(data => (info = data));
-//   return info;
-// };

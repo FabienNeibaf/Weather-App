@@ -62,10 +62,9 @@ export const mount = (node, host) => {
 };
 
 export class Observable {
-  constructor(model) {
-    this.model = model;
+  constructor() {
     this.handlers = {};
-    this.build(model);
+    this.build();
   }
 
   on(action, handler) {
@@ -73,12 +72,13 @@ export class Observable {
     else this.handlers[action] = [handler];
   }
 
-  build(model) {
-    Object.getOwnPropertyNames(Object.getPrototypeOf(model)).forEach(prop => {
-      if (typeof model[prop] === 'function' && prop !== 'constructor') {
+  build() {
+    const prototype = Object.getPrototypeOf(this);
+    Object.getOwnPropertyNames(prototype).forEach(prop => {
+      if (prop !== 'constructor' && typeof prototype[prop] === 'function') {
         Object.defineProperty(this, prop, {
           value: (...args) => {
-            const val = model[prop](...args);
+            const val = prototype[prop].call(this, ...args);
             if (this.handlers[prop])
               this.handlers[prop].forEach(handler => handler(val));
             return val;

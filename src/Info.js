@@ -1,29 +1,19 @@
+const degree = temp => Math.round(temp - 273.15);
+
 const Info = data => {
   const { city, list } = data;
-  const days = [];
-  const date = null;
-  let current = {};
-  let count = 0;
-  list.forEach(item => {
-    if (date !== new Date(item.dt_txt.split(' ')[0])) {
-      count = 1;
-      current = {
-        date: item.dt_txt,
-        wind: item.wind.speed,
-        clouds: item.clouds.all,
-        humidity: item.main.humidity,
-        pressure: item.main.pressure,
-        icon: item.weather[0].icon,
-        temp_min: item.main.temp_min,
-        temp_max: item.main.temp_max,
-        weather: item.weather[0].main,
-        description: item.weather[0].description,
-      };
-    } else {
-      current;
-    }
-  });
-  return { city: city.name, days };
+  const fore = list.map(item => ({
+    clouds: item.clouds.all,
+    icon: item.weather[0].icon,
+    date: new Date(item.dt_txt),
+    humidity: item.main.humidity,
+    pressure: item.main.pressure,
+    temp: degree(item.main.temp),
+    rain: item.rain && item.rain['3h'],
+    weather: item.weather[0].description,
+    wind: Math.round(item.wind.speed * 10) / 10,
+  }));
+  return { city, fore };
 };
 
 export default Info;
