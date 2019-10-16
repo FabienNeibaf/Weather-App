@@ -1,5 +1,5 @@
 const celsius = temp => Math.round(temp - 273.15);
-const fahrenheit = temp => Math.round(((temp - 273.15) * 9) / 5);
+const fahrenheit = temp => Math.round(((temp - 273.15) * 9) / 5 + 32);
 
 const Info = data => {
   const { city, list } = data;

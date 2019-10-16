@@ -129,7 +129,6 @@ const Header = forecast => {
 };
 
 const Main = forecast => {
-  const { tempUnit } = forecast;
   const content = el('div', { id: 'content' });
   forecast.on('showIn', unit => {
     const info = forecast.getInfo();
@@ -139,6 +138,7 @@ const Main = forecast => {
     }
   });
   forecast.on('get', info => {
+    const { tempUnit } = forecast;
     info.then(data => {
       if (Object.getPrototypeOf(data).name === 'Error') {
         mount(el('div', { class: 'error' }, data.message), content);
