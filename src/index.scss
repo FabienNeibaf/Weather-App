@@ -33,7 +33,9 @@ p {
 
 #app,
 #main {
+  display: -webkit-box;
   display: flex;
+  -webkit-box-orient: vertical;
   flex-direction: column;
 }
 
@@ -51,6 +53,7 @@ p {
 
 #header {
   width: 90%;
+  display: -webkit-box;
   display: flex;
   padding: 1% 2%;
   max-width: 900px;
@@ -125,8 +128,10 @@ p {
   flex: auto;
   width: 90%;
   padding: 2%;
+  display: -webkit-box;
   display: flex;
   max-width: 900px;
+  -webkit-box-orient: vertical;
   flex-direction: column;
   border: 1px solid #333;
   border-top: none;
@@ -142,6 +147,7 @@ p {
 
   .current,
   .forecast {
+    display: -webkit-box;
     display: flex;
     flex-wrap: wrap;
   }
