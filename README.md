@@ -1,5 +1,5 @@
 # :partly_sunny: Weather App
-This weather app allow you to get the forecast for a location of your choice buy searching it through the search box.  
+This weather app allow you to get the forecast for a location of your choice by searching it through the search box.  
 By default it looks up your location and if available use it to deliver your current forecast.  
 
 # Technologies
