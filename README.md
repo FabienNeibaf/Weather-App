@@ -4,6 +4,7 @@ The Weather App project brings together the concepts of Promises, Callbacks, API
 To handle the complexity of synchronizing the views with data changes, I created an Observable object on which can be attached handlers. The `Observable class` is located in `./src/utils.js`.  
 Also the app takes care of updating the information every **10mn** as it is recommended by [OpenWeather](https://openweathermap.org/appid).  
 This project is part of [microverse](https://www.microverse.org/) curriculum.  
+
 ![Weather](https://github.com/FabienNeibaf/Portfolio/blob/master/src/images/Weather.png)
 
 # :electric_plug: Set up
