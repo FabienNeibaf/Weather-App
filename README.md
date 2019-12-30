@@ -2,6 +2,8 @@
 This weather app allow you to get the forecast for a location of your choice by searching it through the search box.  
 By default it looks up your location and if available use it to deliver your current forecast.  
 
+![Weather](https://github.com/FabienNeibaf/Portfolio/blob/master/src/images/Weather.png)
+
 # Technologies
 
 This app uses:
@@ -16,8 +18,6 @@ The `Observable class` is located in `./src/utils.js`.
 Also the app takes care of updating the information every **10mn** as it is recommended by [OpenWeather](https://openweathermap.org/appid).  
 
 This project is part of [microverse](https://www.microverse.org/) curriculum.  
-
-![Weather](https://github.com/FabienNeibaf/Portfolio/blob/master/src/images/Weather.png)
 
 # :electric_plug: Set up
 
