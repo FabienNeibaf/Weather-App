@@ -13,6 +13,7 @@ This app uses:
 - Object Oriented Programming
 - Factory Functions
 - Module Pattern 
+
 To handle the complexity of synchronizing the views with data changes, I created an Observable object on which can be attached handlers.  
 The `Observable class` is located in `./src/utils.js`.  
 Also the app takes care of updating the information every **10mn** as it is recommended by [OpenWeather](https://openweathermap.org/appid).  
