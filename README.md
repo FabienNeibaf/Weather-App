@@ -35,11 +35,11 @@ To run the project:
 Feel free to contribute if you want to make it better.
 
 # Author
+- Github: https://github.com/FabienNeibaf
+- Email: fabienrakotomampiandra@gmail.com
 
-- [Fabien RAKOTOMAMPIANDRA](https://github.com/FabienNeibaf/)
-
-# Contact
-- [Email](fabienrakotomampiandra@gmail.com)
-- [LinkedIn](https://www.linkedin.com/in/fabien-rakotomampiandra/)
+# Follow me
+- [LinkedIn](https://www.linkedin.com/in/fabien-rakotomampiandra-96567b17b/)
 - [AngelList](https://angel.co/fabien-rakotomampiandra)
+- [Twitter](https://twitter.com/Neibaflintone)
 - [Portfolio](https://fabienneibaf.github.io/Portfolio/)
