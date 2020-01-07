@@ -37,3 +37,9 @@ Feel free to contribute if you want to make it better.
 # Author
 
 - [Fabien RAKOTOMAMPIANDRA](https://github.com/FabienNeibaf/)
+
+# Contact
+- [Email](fabienrakotomampiandra@gmail.com)
+- [LinkedIn](https://www.linkedin.com/in/fabien-rakotomampiandra/)
+- [AngelList](https://angel.co/fabien-rakotomampiandra)
+- [Portfolio](https://fabienneibaf.github.io/Portfolio/)
