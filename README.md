@@ -1,6 +1,6 @@
 # :partly_sunny: Weather App
-This weather app allow you to get the forecast for a location of your choice by searching it through the search box.  
-By default it looks up your location and if available use it to deliver your current forecast.  
+This weather app allows you to get the forecast of a location of your choice by typing it in the search box.  
+By default, the app detects your current location, and if available, use it to get the weather information.  
 
 ![Weather](https://github.com/FabienNeibaf/Portfolio/blob/master/src/images/Weather.png)
 
